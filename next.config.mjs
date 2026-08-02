@@ -8,7 +8,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: `${process.env.BACKEND_URL || 'http://localhost:5001'}/api/:path*`,
+        destination: `${process.env.BACKEND_URL || 'https://saiseo-backend.onrender.com'}/api/:path*`,
       },
     ];
   },

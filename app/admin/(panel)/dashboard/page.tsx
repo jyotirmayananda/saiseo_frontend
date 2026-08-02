@@ -23,7 +23,7 @@ export default async function DashboardPage() {
   };
 
   try {
-    const backendUrl = process.env.BACKEND_URL || "http://localhost:5001";
+    const backendUrl = process.env.BACKEND_URL || "https://saiseo-backend.onrender.com";
     const res = await fetch(`${backendUrl}/api/students/stats`, {
       headers: {
         Cookie: `saiseo-admin-token=${token || ""}`,
