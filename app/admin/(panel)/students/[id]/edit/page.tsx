@@ -28,6 +28,7 @@ export default function EditStudentPage({
           dob: student.dob,
           contactNumber: student.contactNumber,
           photoUrl: student.photoUrl || "",
+          certificateUrl: student.certificateUrl || "",
           results: student.results.map(
             (r: {
               subjectName: string;

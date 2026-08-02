@@ -10,6 +10,8 @@ interface ResultCardProps {
       rollNumber: string;
       course: string;
       fatherName: string;
+      photoUrl?: string | null;
+      certificateUrl?: string | null;
     };
     results: {
       subjectName: string;
@@ -35,11 +37,20 @@ export default function ResultCard({ data }: ResultCardProps) {
       </div>
 
       <div className="space-y-5 p-6">
-        <div className="grid gap-4 sm:grid-cols-2">
-          <Info label="Student" value={data.student.name} />
-          <Info label="Roll No." value={data.student.rollNumber} />
-          <Info label="Course" value={data.student.course} />
-          <Info label="Father's Name" value={data.student.fatherName} />
+        <div className="flex flex-col-reverse gap-4 sm:flex-row sm:justify-between sm:items-start">
+          <div className="grid gap-4 sm:grid-cols-2 flex-1">
+            <Info label="Student" value={data.student.name} />
+            <Info label="Roll No." value={data.student.rollNumber} />
+            <Info label="Course" value={data.student.course} />
+            <Info label="Father's Name" value={data.student.fatherName} />
+          </div>
+          {data.student.photoUrl && (
+            <img
+              src={data.student.photoUrl}
+              alt={data.student.name}
+              className="h-20 w-20 rounded-full object-cover border border-slate-200 self-center sm:self-auto"
+            />
+          )}
         </div>
 
         <div className="overflow-hidden rounded-xl border border-slate-200">
@@ -94,6 +105,21 @@ export default function ResultCard({ data }: ResultCardProps) {
             </span>
           </div>
         </div>
+
+        {data.student.certificateUrl && (
+          <div className="mt-6 border-t border-slate-100 pt-6">
+            <p className="text-xs font-semibold text-muted uppercase tracking-wider mb-2">
+              Official Certificate
+            </p>
+            <div className="overflow-hidden rounded-xl border border-slate-200 bg-surface p-2 flex justify-center">
+              <img
+                src={data.student.certificateUrl}
+                alt="Certificate"
+                className="w-full h-auto max-h-[400px] object-contain rounded-lg"
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

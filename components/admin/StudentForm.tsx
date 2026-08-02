@@ -29,6 +29,7 @@ export default function StudentForm({ studentId, initialData }: StudentFormProps
     handleSubmit,
     watch,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<StudentFormData>({
     resolver: zodResolver(studentSchema),
@@ -40,9 +41,32 @@ export default function StudentForm({ studentId, initialData }: StudentFormProps
       dob: "",
       contactNumber: "",
       photoUrl: "",
+      certificateUrl: "",
       results: [{ subjectName: "", marksObtained: 0, maxMarks: 100 }],
     },
   });
+
+  const photoUrl = watch("photoUrl");
+  const certificateUrl = watch("certificateUrl");
+
+  const handleFileChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: "photoUrl" | "certificateUrl"
+  ) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 2 * 1024 * 1024) {
+      alert("File size should not exceed 2MB.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setValue(field, reader.result as string, { shouldValidate: true });
+    };
+    reader.readAsDataURL(file);
+  };
 
   const { fields, append, remove } = useFieldArray({ control, name: "results" });
   const results = watch("results");
@@ -100,6 +124,79 @@ export default function StudentForm({ studentId, initialData }: StudentFormProps
           <Input label="Father's Name" error={errors.fatherName?.message} {...register("fatherName")} />
           <Input label="Date of Birth" type="date" error={errors.dob?.message} {...register("dob")} />
           <Input label="Contact Number" error={errors.contactNumber?.message} {...register("contactNumber")} />
+        </div>
+
+        {/* Media Upload Options */}
+        <div className="mt-6 border-t border-slate-100 pt-6 grid gap-6 sm:grid-cols-2">
+          {/* Profile Photo */}
+          <div>
+            <label className="mb-1.5 block text-sm font-medium text-slate-700">Profile Photo</label>
+            <div className="flex items-center gap-4">
+              {photoUrl ? (
+                <img
+                  src={photoUrl}
+                  alt="Profile"
+                  className="h-16 w-16 rounded-full object-cover border border-slate-200"
+                />
+              ) : (
+                <div className="h-16 w-16 rounded-full bg-slate-100 flex items-center justify-center border border-slate-200 text-xs text-muted">
+                  No Photo
+                </div>
+              )}
+              <div className="flex-1">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleFileChange(e, "photoUrl")}
+                  className="block w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-teal/10 file:text-brand hover:file:bg-teal/20 cursor-pointer"
+                />
+                {photoUrl && (
+                  <button
+                    type="button"
+                    onClick={() => setValue("photoUrl", "")}
+                    className="mt-1 text-xs text-red-500 hover:underline"
+                  >
+                    Remove Photo
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Certificate Image */}
+          <div>
+            <label className="mb-1.5 block text-sm font-medium text-slate-700">Certificate Image</label>
+            <div className="flex items-center gap-4">
+              {certificateUrl ? (
+                <img
+                  src={certificateUrl}
+                  alt="Certificate"
+                  className="h-16 w-24 rounded-lg object-cover border border-slate-200"
+                />
+              ) : (
+                <div className="h-16 w-24 rounded-lg bg-slate-100 flex items-center justify-center border border-slate-200 text-xs text-muted">
+                  No Image
+                </div>
+              )}
+              <div className="flex-1">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleFileChange(e, "certificateUrl")}
+                  className="block w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-teal/10 file:text-brand hover:file:bg-teal/20 cursor-pointer"
+                />
+                {certificateUrl && (
+                  <button
+                    type="button"
+                    onClick={() => setValue("certificateUrl", "")}
+                    className="mt-1 text-xs text-red-500 hover:underline"
+                  >
+                    Remove Certificate
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

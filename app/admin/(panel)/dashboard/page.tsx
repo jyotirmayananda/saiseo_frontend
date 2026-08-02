@@ -1,16 +1,44 @@
-import { prisma } from "@/lib/prisma";
+import { cookies } from "next/headers";
 import StatsCards from "@/components/admin/StatsCards";
 
+interface DashboardData {
+  totalStudents: number;
+  totalCourses: number;
+  recentStudents: {
+    id: string;
+    name: string;
+    rollNumber: string;
+    course: string;
+  }[];
+}
+
 export default async function DashboardPage() {
-  const [totalStudents, courses, recentStudents] = await Promise.all([
-    prisma.student.count(),
-    prisma.student.findMany({ select: { course: true }, distinct: ["course"] }),
-    prisma.student.findMany({
-      take: 5,
-      orderBy: { createdAt: "desc" },
-      select: { id: true, name: true, rollNumber: true, course: true },
-    }),
-  ]);
+  const cookieStore = await cookies();
+  const token = cookieStore.get("saiseo-admin-token")?.value;
+
+  let stats: DashboardData = {
+    totalStudents: 0,
+    totalCourses: 0,
+    recentStudents: [],
+  };
+
+  try {
+    const backendUrl = process.env.BACKEND_URL || "http://localhost:5001";
+    const res = await fetch(`${backendUrl}/api/students/stats`, {
+      headers: {
+        Cookie: `saiseo-admin-token=${token || ""}`,
+      },
+      cache: "no-store",
+    });
+
+    if (res.ok) {
+      stats = await res.json();
+    }
+  } catch (error) {
+    console.error("Failed to fetch dashboard stats from backend:", error);
+  }
+
+  const { totalStudents, totalCourses, recentStudents } = stats;
 
   return (
     <div>
@@ -19,7 +47,7 @@ export default async function DashboardPage() {
 
       <StatsCards
         totalStudents={totalStudents}
-        totalCourses={courses.length}
+        totalCourses={totalCourses}
         recentCount={recentStudents.length}
       />
 

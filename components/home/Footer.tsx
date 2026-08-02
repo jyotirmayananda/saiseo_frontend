@@ -6,8 +6,20 @@ import { Phone, Mail, MapPin } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer id="contact" className="border-t border-white/10 bg-brand text-white/70">
-      <div className="container-main py-12 pb-8 sm:py-14">
+    <footer
+      id="contact"
+      className="relative border-t border-white/10 bg-brand text-slate-100 overflow-hidden shadow-[0_-12px_30px_rgba(0,0,0,0.65)]"
+      style={{
+        backgroundImage: "url('/footer_bg.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        boxShadow: "inset 0 24px 48px rgba(0, 0, 0, 0.95), inset 0 -24px 48px rgba(0, 0, 0, 0.95)",
+      }}
+    >
+      {/* Dark tint overlay for maximum text readability */}
+      <div className="absolute inset-0 bg-slate-950/96 z-0" />
+
+      <div className="relative container-main py-12 pb-8 sm:py-14 z-10 filter drop-shadow-[0_2px_8px_rgba(0,0,0,1)]" style={{ textShadow: "0 2px 10px rgba(0, 0, 0, 0.95), 0 1px 3px rgba(0, 0, 0, 0.95)" }}>
         <div className="grid gap-10 md:grid-cols-3">
           <div>
             <Link href="/" className="flex items-center gap-2.5">

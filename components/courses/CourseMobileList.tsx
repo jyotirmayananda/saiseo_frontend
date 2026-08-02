@@ -24,6 +24,33 @@ const categoryRing: Record<CourseCategory, string> = {
   professional: "ring-maroon/20",
 };
 
+const courseImageMap: Record<string, string> = {
+  pgdca: "/courses/diploma_general.png",
+  dca: "/courses/diploma_general.png",
+  cca: "/courses/diploma_general.png",
+  python: "/courses/python_programming.png",
+  java: "/courses/java_backend.png",
+  c: "/courses/java_backend.png",
+  cpp: "/courses/java_backend.png",
+  php: "/courses/web_design.png",
+  dotnet: "/courses/java_backend.png",
+  oracle: "/courses/database_oracle.png",
+  webdesign: "/courses/web_design.png",
+  tally: "/courses/office_accounting.png",
+  autocad: "/courses/cad_engineering.png",
+  photoshop: "/courses/web_design.png",
+  hardware: "/courses/hardware_networking.png",
+  networking: "/courses/hardware_networking.png",
+};
+
+function getCourseImage(courseId: string): string {
+  const mapped = courseImageMap[courseId.toLowerCase()];
+  if (mapped !== undefined) {
+    return mapped;
+  }
+  return "/courses/diploma_general.png";
+}
+
 export default function CourseMobileList({
   courses,
   category,
@@ -37,6 +64,7 @@ export default function CourseMobileList({
     <div className="space-y-3">
       {courses.map((course, index) => {
         const isOpen = openId === course.id;
+        const imageUrl = getCourseImage(course.id);
         return (
           <motion.article
             key={course.id}
@@ -102,6 +130,13 @@ export default function CourseMobileList({
                   className="overflow-hidden"
                 >
                   <div className="space-y-4 border-t border-slate-100 px-4 pb-4 pt-3">
+                    <div className="h-32 w-full overflow-hidden rounded-xl bg-slate-100">
+                      <img
+                        src={imageUrl}
+                        alt={course.fullName}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
                     <p className="text-sm leading-relaxed text-slate-600">
                       {course.description}
                     </p>

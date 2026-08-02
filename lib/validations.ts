@@ -24,6 +24,7 @@ export const studentSchema = z.object({
   dob: z.string().min(1, "Date of birth is required"),
   contactNumber: z.string().min(10, "Valid contact number required"),
   photoUrl: z.string().optional(),
+  certificateUrl: z.string().optional(),
   results: z.array(subjectSchema).min(1, "At least one subject is required"),
 });
 
