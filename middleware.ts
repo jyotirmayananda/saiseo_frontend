@@ -15,6 +15,20 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Redirect /admin directly to /admin/dashboard or /admin/login
+  if (pathname === "/admin") {
+    const token = request.cookies.get("saiseo-admin-token")?.value;
+    if (token) {
+      try {
+        await jwtVerify(token, JWT_SECRET);
+        return NextResponse.redirect(new URL("/admin/dashboard", request.url));
+      } catch {
+        // token invalid or expired, proceed to redirect to login
+      }
+    }
+    return NextResponse.redirect(new URL("/admin/login", request.url));
+  }
+
   if (publicPaths.some((p) => pathname.startsWith(p))) {
     const token = request.cookies.get("saiseo-admin-token")?.value;
     if (token) {
