@@ -63,12 +63,12 @@ export default function Navbar() {
         style={{ paddingTop: "max(0.75rem, env(safe-area-inset-top, 0px))" }}
       >
         <div className="container-main flex items-center justify-between gap-3">
-          <Link href="/" className="flex min-w-0 items-center gap-2">
-            <Image src="/logo.svg" alt="Sai SEO" width={34} height={34} priority />
+          <Link href="/" className="flex min-w-0 items-center gap-3.5">
+            <Image src="/logo.png" alt="Sai SEO" width={80} height={80} priority />
             <div className="min-w-0">
               <p
                 className={cn(
-                  "truncate font-heading text-sm font-bold leading-tight",
+                  "truncate font-heading text-xl font-bold leading-tight",
                   onDarkHero ? "text-white" : "text-brand"
                 )}
               >
@@ -76,7 +76,7 @@ export default function Navbar() {
               </p>
               <p
                 className={cn(
-                  "truncate text-[10px]",
+                  "truncate text-sm font-medium tracking-wide mt-0.5",
                   onDarkHero ? "text-slate-300" : "text-muted"
                 )}
               >
@@ -108,7 +108,7 @@ export default function Navbar() {
 
           <div className="flex items-center gap-1 md:hidden">
             <a
-              href="tel:9437020011"
+              href="tel:7978258180"
               className={cn(
                 "flex h-9 w-9 items-center justify-center rounded-xl transition-colors",
                 onDarkHero
@@ -188,13 +188,38 @@ export default function Navbar() {
               </nav>
 
               <div className="mx-4 mb-2 rounded-2xl bg-brand p-4 text-white">
-                <p className="text-sm font-semibold">Hatibandha Street, Brahmapur</p>
                 <a
-                  href="tel:9437020011"
-                  className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-teal py-3 text-sm font-semibold text-white"
+                  href="https://maps.app.goo.gl/RGQptfJFbHUzM5seA"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-start gap-2 text-sm font-semibold hover:text-teal-light transition-colors"
+                >
+                  <MapPin size={16} className="mt-0.5 shrink-0 text-teal-light group-hover:scale-110 transition-transform" />
+                  <span>Hatibandha Street, Brahmapur</span>
+                </a>
+                <a
+                  href="tel:7978258180"
+                  className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-teal py-3 text-sm font-semibold text-white hover:bg-teal-dark transition-colors"
                 >
                   <Phone size={16} />
-                  Call +91 9437020011
+                  Call +91 7978258180
+                </a>
+                <a
+                  href="https://www.youtube.com/@saiseosolution"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-[#FF0000] py-3 text-sm font-semibold text-white hover:bg-[#D90000] transition-colors"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    width={16}
+                    height={16}
+                    className="fill-white"
+                  >
+                    <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.108C19.524 3.545 12 3.545 12 3.545s-7.525 0-9.388.51a3.003 3.003 0 0 0-2.11 2.108C0 8.025 0 12 0 12s0 3.975.502 5.837a3.003 3.003 0 0 0 2.11 2.108c1.863.51 9.388.51 9.388.51s7.525 0 9.388-.51a3.003 3.003 0 0 0 2.11-2.108C24 15.975 24 12 24 12s0-3.975-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                  </svg>
+                  <span>YouTube Channel</span>
                 </a>
               </div>
             </motion.div>

@@ -34,7 +34,7 @@ export default function Sidebar() {
   const nav = (
     <>
       <div className="flex items-center gap-2.5 border-b border-slate-200 px-5 py-5">
-        <Image src="/logo.svg" alt="Sai SEO" width={32} height={32} />
+        <Image src="/logo.png" alt="Sai SEO" width={40} height={40} />
         <div>
           <p className="font-heading text-sm font-bold text-brand">Sai SEO</p>
           <p className="text-[10px] text-muted">Admin Panel</p>

@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 const items = [
   { href: "/", label: "Home", icon: Home, match: (p: string) => p === "/" },
   { href: "/#courses", label: "Courses", icon: BookOpen, match: (p: string) => p === "/" },
-  { href: "tel:9437020011", label: "Call", icon: Phone, match: () => false, external: true },
+  { href: "tel:7978258180", label: "Call", icon: Phone, match: () => false, external: true },
   { href: "/gallery", label: "Gallery", icon: Images, match: (p: string) => p === "/gallery" },
   { href: "/result", label: "Result", icon: FileText, match: (p: string) => p === "/result" },
 ];

@@ -63,7 +63,7 @@ export default function AdminLoginPage() {
         </Link>
 
         <div className="mb-6 flex items-center gap-3">
-          <Image src="/logo.svg" alt="Sai SEO" width={40} height={40} />
+          <Image src="/logo.png" alt="Sai SEO" width={48} height={48} />
           <div>
             <h1 className="font-heading text-xl font-bold text-brand">Admin Login</h1>
             <p className="text-sm text-muted">Sai SEO Solution</p>

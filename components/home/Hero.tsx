@@ -133,25 +133,30 @@ export default function Hero() {
             </div>
 
             <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm lg:mt-8">
-              <div className="flex items-start gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal/20 text-teal-light">
+              <a
+                href="https://maps.app.goo.gl/RGQptfJFbHUzM5seA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-start gap-3 hover:opacity-95 transition-opacity"
+              >
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal/20 text-teal-light group-hover:scale-105 transition-transform duration-200">
                   <MapPin size={18} />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm font-semibold text-white">
+                  <p className="text-sm font-semibold text-white group-hover:text-teal-light transition-colors duration-200">
                     Hatibandha Street, Brahmapur
                   </p>
-                  <p className="text-xs text-slate-400">
-                    Software & Hardware Solution
+                  <p className="text-xs text-slate-400 group-hover:text-slate-300 transition-colors duration-200">
+                    Software & Hardware Solution (View Map)
                   </p>
                 </div>
-              </div>
+              </a>
               <a
-                href="tel:9437020011"
-                className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-teal/20 py-3 text-sm font-semibold text-white transition-colors active:bg-teal/30 lg:mt-4 lg:w-auto lg:rounded-full lg:px-4 lg:py-2.5 lg:bg-white/10"
+                href="tel:7978258180"
+                className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-teal/20 py-3 text-sm font-semibold text-white transition-colors hover:bg-teal/30 active:bg-teal/40 lg:mt-4 lg:w-auto lg:rounded-full lg:px-4 lg:py-2.5 lg:bg-white/10"
               >
                 <Phone size={15} className="text-teal-light" />
-                Call +91 9437020011
+                Call +91 7978258180
               </a>
             </div>
           </motion.div>
