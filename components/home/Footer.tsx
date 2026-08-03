@@ -22,11 +22,14 @@ export default function Footer() {
       <div className="relative container-main py-12 pb-8 sm:py-14 z-10 filter drop-shadow-[0_2px_8px_rgba(0,0,0,1)]" style={{ textShadow: "0 2px 10px rgba(0, 0, 0, 0.95), 0 1px 3px rgba(0, 0, 0, 0.95)" }}>
         <div className="grid gap-10 md:grid-cols-3">
           <div>
-            <Link href="/" className="flex items-center gap-2.5">
-              <Image src="/logo.png" alt="Sai SEO" width={40} height={40} />
-              <span className="font-heading text-sm font-bold text-white">
-                Sai SEO Solution
-              </span>
+            <Link href="/" className="flex items-center gap-3.5">
+              <Image src="/logo.png" alt="Sai SEO" width={80} height={80} />
+              <div className="min-w-0">
+                <p className="font-heading text-xl font-bold text-white leading-tight">
+                  Sai SEO Solution
+                </p>
+                <p className="text-xs text-slate-400 mt-0.5">Software & Hardware Solution</p>
+              </div>
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed">
               A Unit of Software & Hardware Solution. Quality computer education
