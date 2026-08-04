@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "framer-motion";
 import { z } from "zod";
+import { useSearchParams } from "next/navigation";
 import Input from "@/components/ui/Input";
 import ResultCard from "@/components/result/ResultCard";
 import { Search, AlertCircle } from "lucide-react";
@@ -34,14 +35,17 @@ interface ResultData {
   passed: boolean;
 }
 
-export default function ResultPage() {
+function ResultPageContent() {
   const [result, setResult] = useState<ResultData | null>(null);
   const [notFound, setNotFound] = useState(false);
   const [loading, setLoading] = useState(false);
+  const searchParams = useSearchParams();
+  const rollNumberParam = searchParams.get("rollNumber");
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<RollFormData>({
     resolver: zodResolver(rollSchema),
@@ -68,6 +72,13 @@ export default function ResultPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (rollNumberParam) {
+      setValue("rollNumber", rollNumberParam);
+      onSubmit({ rollNumber: rollNumberParam });
+    }
+  }, [rollNumberParam, setValue]);
 
   return (
     <section className="min-h-screen bg-surface pt-24 pb-16">
@@ -135,5 +146,17 @@ export default function ResultPage() {
         </AnimatePresence>
       </div>
     </section>
+  );
+}
+
+export default function ResultPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-surface flex items-center justify-center">
+        <p className="text-muted">Loading Portal...</p>
+      </div>
+    }>
+      <ResultPageContent />
+    </Suspense>
   );
 }
