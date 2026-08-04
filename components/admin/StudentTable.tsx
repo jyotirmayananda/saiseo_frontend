@@ -57,9 +57,19 @@ export default function StudentTable() {
 
   const handleDelete = async (id: string, name: string) => {
     if (!confirm(`Delete student "${name}"?`)) return;
-    await fetch(`/api/students/${id}`, { method: "DELETE" });
-    fetchStudents();
-    router.refresh();
+    try {
+      const res = await fetch(`/api/students/${id}`, { method: "DELETE" });
+      if (!res.ok) {
+        const data = await res.json();
+        alert(data.error || "Failed to delete student");
+        return;
+      }
+      fetchStudents();
+      router.refresh();
+    } catch (err) {
+      console.error("Delete error:", err);
+      alert("An error occurred while deleting the student.");
+    }
   };
 
   return (
