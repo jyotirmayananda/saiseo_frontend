@@ -1,6 +1,7 @@
 import Hero from "@/components/home/Hero";
 import TrustBar from "@/components/home/TrustBar";
 import Showcase from "@/components/home/Showcase";
+import PressCoverage from "@/components/home/PressCoverage";
 import Courses from "@/components/home/Courses";
 import Services from "@/components/home/Services";
 import { GalleryPreview } from "@/components/gallery/GalleryPageContent";
@@ -15,6 +16,7 @@ export default function HomePage() {
       <Hero />
       <TrustBar />
       <Showcase />
+      <PressCoverage />
       <YouTubeSection />
       <Courses />
       <Services />
@@ -25,3 +27,4 @@ export default function HomePage() {
     </>
   );
 }
+
