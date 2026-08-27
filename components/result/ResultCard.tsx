@@ -12,6 +12,11 @@ interface ResultCardProps {
       fatherName: string;
       photoUrl?: string | null;
       certificateUrl?: string | null;
+      studentType?: string;
+      internshipStartDate?: string | null;
+      internshipEndDate?: string | null;
+      passoutYear?: string | null;
+      passoutDate?: string | null;
     };
     results: {
       subjectName: string;
@@ -27,11 +32,13 @@ interface ResultCardProps {
 }
 
 export default function ResultCard({ data }: ResultCardProps) {
+  const isIntern = data.student.studentType === "internship";
+
   return (
     <div className="card overflow-hidden shadow-card">
       <div className="bg-brand px-6 py-4">
         <p className="text-xs font-bold uppercase tracking-wider text-teal-light">
-          Examination Result
+          {isIntern ? "Internship Record" : "Examination Result"}
         </p>
         <p className="font-heading font-semibold text-white">Sai SEO Solution</p>
       </div>
@@ -39,10 +46,22 @@ export default function ResultCard({ data }: ResultCardProps) {
       <div className="space-y-5 p-6">
         <div className="flex flex-col-reverse gap-4 sm:flex-row sm:justify-between sm:items-start">
           <div className="grid gap-4 sm:grid-cols-2 flex-1">
-            <Info label="Student" value={data.student.name} />
+            <Info label={isIntern ? "Intern" : "Student"} value={data.student.name} />
             <Info label="Roll No." value={data.student.rollNumber} />
-            <Info label="Course" value={data.student.course} />
+            <Info label={isIntern ? "Domain" : "Course"} value={data.student.course} />
             <Info label="Father's Name" value={data.student.fatherName} />
+            {data.student.passoutYear && (
+              <Info label="Passout Year" value={data.student.passoutYear} />
+            )}
+            {data.student.passoutDate && (
+              <Info label="Passout Date" value={data.student.passoutDate} />
+            )}
+            {isIntern && data.student.internshipStartDate && (
+              <Info label="Internship Start" value={data.student.internshipStartDate} />
+            )}
+            {isIntern && data.student.internshipEndDate && (
+              <Info label="Internship End" value={data.student.internshipEndDate} />
+            )}
           </div>
           {data.student.photoUrl && (
             <img
@@ -53,6 +72,7 @@ export default function ResultCard({ data }: ResultCardProps) {
           )}
         </div>
 
+        {data.results.length > 0 && (
         <div className="overflow-hidden rounded-xl border border-slate-200">
           <table className="w-full text-sm">
             <thead>
@@ -81,7 +101,9 @@ export default function ResultCard({ data }: ResultCardProps) {
             </tbody>
           </table>
         </div>
+        )}
 
+        {data.results.length > 0 && (
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           <Stat label="Total" value={`${data.totalObtained}/${data.totalMax}`} />
           <Stat label="Percentage" value={`${data.percentage}%`} />
@@ -105,6 +127,7 @@ export default function ResultCard({ data }: ResultCardProps) {
             </span>
           </div>
         </div>
+        )}
 
         {data.student.certificateUrl && (
           <div className="mt-6 border-t border-slate-100 pt-6">

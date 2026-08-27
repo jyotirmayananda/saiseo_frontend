@@ -21,7 +21,7 @@ export const latestIndependenceDayImages = [
     tag: "📰 In The News",
     date: "August 2026",
     description:
-      "Featured in leading Odia daily: Managing Director Jyotirmaya Nahak hoists the National Tricolor at Sai SEO Solution / Sai Skill Development Institute, Hatibandha Street, Brahmapur with honored guests.",
+      "Featured in leading Odia daily: Managing Director Uma Sankar Mohanty hoists the National Tricolor at Sai SEO Solution / Sai Skill Development Institute, Hatibandha Street, Brahmapur with honored guests.",
     isFeatured: true,
   },
   {

@@ -10,6 +10,7 @@ import {
   LogOut,
   Menu,
   X,
+  Briefcase,
 } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -17,6 +18,7 @@ import { cn } from "@/lib/utils";
 const links = [
   { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/students", label: "Students", icon: Users },
+  { href: "/admin/internships", label: "Internships", icon: Briefcase },
   { href: "/admin/students/new", label: "Add Student", icon: UserPlus },
 ];
 
@@ -45,7 +47,9 @@ export default function Sidebar() {
         {links.map((link) => {
           const isActive =
             pathname === link.href ||
-            (link.href !== "/admin/dashboard" && pathname.startsWith(link.href));
+            (link.href !== "/admin/dashboard" &&
+              link.href !== "/admin/students/new" &&
+              pathname.startsWith(link.href));
 
           return (
             <Link

@@ -124,7 +124,7 @@ export default function PressCoverage() {
 
             <p className="text-sm leading-relaxed text-slate-600 sm:text-base">
               The grand celebration at our Hatibandha Street campus was covered in leading regional print media. Managing Director{" "}
-              <strong className="text-brand">Jyotirmaya Nahak</strong> hoisted the National Tricolor, addressing students on digital empowerment and job-oriented IT training in the presence of distinguished guests.
+              <strong className="text-brand">Uma Sankar Mohanty</strong> hoisted the National Tricolor, addressing students on digital empowerment and job-oriented IT training in the presence of distinguished guests.
             </p>
 
             {/* Feature Points */}
@@ -138,7 +138,7 @@ export default function PressCoverage() {
                     Leadership Address
                   </h4>
                   <p className="mt-0.5 text-xs text-slate-600">
-                    Flag hoisting and motivational address by Director Jyotirmaya Nahak.
+                    Flag hoisting and motivational address by Director Uma Sankar Mohanty.
                   </p>
                 </div>
               </div>
@@ -152,7 +152,7 @@ export default function PressCoverage() {
                     Honored Guests
                   </h4>
                   <p className="mt-0.5 text-xs text-slate-600">
-                    Presence of Kairaba Prasad Das, Sanjita Mohanty & Manoranjan Sahu.
+                    Presence of Bhairaba Prasad Das, Sasmita Mahanty & Manoranjan Sahu.
                   </p>
                 </div>
               </div>

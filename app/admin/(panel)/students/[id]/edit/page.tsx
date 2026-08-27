@@ -29,7 +29,13 @@ export default function EditStudentPage({
           contactNumber: student.contactNumber,
           photoUrl: student.photoUrl || "",
           certificateUrl: student.certificateUrl || "",
-          results: student.results.map(
+          studentType:
+            student.studentType === "internship" ? "internship" : "course",
+          internshipStartDate: student.internshipStartDate || "",
+          internshipEndDate: student.internshipEndDate || "",
+          passoutYear: student.passoutYear || "",
+          passoutDate: student.passoutDate || "",
+          results: (student.results || []).map(
             (r: {
               subjectName: string;
               marksObtained: number;
@@ -47,12 +53,19 @@ export default function EditStudentPage({
   }, [params.id]);
 
   if (loading) return <p className="text-muted">Loading...</p>;
-  if (notFound || !initialData) return <p className="text-red-600">Student not found.</p>;
+  if (notFound || !initialData)
+    return <p className="text-red-600">Student not found.</p>;
+
+  const isIntern = initialData.studentType === "internship";
 
   return (
     <div>
-      <h1 className="font-heading text-2xl font-bold text-brand">Edit Student</h1>
-      <p className="mt-1 text-muted">Update student information and results.</p>
+      <h1 className="font-heading text-2xl font-bold text-brand">
+        {isIntern ? "Edit Intern" : "Edit Student"}
+      </h1>
+      <p className="mt-1 text-muted">
+        Update {isIntern ? "intern" : "student"} information and details.
+      </p>
       <div className="mt-8">
         <StudentForm studentId={params.id} initialData={initialData} />
       </div>

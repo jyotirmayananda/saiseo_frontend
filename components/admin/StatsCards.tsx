@@ -1,33 +1,37 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Users, BookOpen, Clock } from "lucide-react";
+import { Users, BookOpen, Briefcase, Clock } from "lucide-react";
 
 interface StatsCardsProps {
   totalStudents: number;
+  totalInterns: number;
   totalCourses: number;
   recentCount: number;
 }
 
 const cards = [
-  { key: "students", label: "Total Students", icon: Users },
-  { key: "courses", label: "Total Courses", icon: BookOpen },
+  { key: "students", label: "Course Students", icon: Users },
+  { key: "interns", label: "Interns", icon: Briefcase },
+  { key: "courses", label: "Courses", icon: BookOpen },
   { key: "recent", label: "Recent Entries", icon: Clock },
 ] as const;
 
 export default function StatsCards({
   totalStudents,
+  totalInterns,
   totalCourses,
   recentCount,
 }: StatsCardsProps) {
   const values: Record<string, number> = {
     students: totalStudents,
+    interns: totalInterns,
     courses: totalCourses,
     recent: recentCount,
   };
 
   return (
-    <div className="mt-8 grid gap-4 sm:grid-cols-3">
+    <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {cards.map((card, i) => (
         <motion.div
           key={card.key}
