@@ -20,15 +20,17 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import {
   allGalleryItems,
   galleryVideos,
+  ganeshPujaImages,
   latestIndependenceDayImages,
   mediaUrl,
   GalleryItem,
 } from "@/lib/gallery";
 
-type FilterTab = "all" | "independence" | "news" | "campus" | "videos";
+type FilterTab = "all" | "ganesh" | "independence" | "news" | "campus" | "videos";
 
 const filterTabs: { id: FilterTab; label: string; count?: number }[] = [
   { id: "all", label: "🌟 All Photos" },
+  { id: "ganesh", label: "🌺 Ganesh Puja" },
   { id: "independence", label: "🇮🇳 Independence Day" },
   { id: "news", label: "📰 In The News" },
   { id: "campus", label: "🏫 Campus & Labs" },
@@ -44,7 +46,7 @@ export default function GalleryPageContent() {
   const [videoLightbox, setVideoLightbox] = useState<string | null>(null);
 
   useEffect(() => {
-    if (initialTab && ["all", "independence", "news", "campus", "videos"].includes(initialTab)) {
+    if (initialTab && ["all", "ganesh", "independence", "news", "campus", "videos"].includes(initialTab)) {
       setActiveTab(initialTab);
     }
   }, [initialTab]);
@@ -52,7 +54,8 @@ export default function GalleryPageContent() {
   // Filter items based on activeTab
   const filteredPhotos: GalleryItem[] = allGalleryItems.filter((item) => {
     if (activeTab === "all") return true;
-    if (activeTab === "independence") return item.category === "events";
+    if (activeTab === "ganesh") return item.tag.includes("Ganesh");
+    if (activeTab === "independence") return item.tag.includes("Independence");
     if (activeTab === "news") return item.category === "news";
     if (activeTab === "campus") return item.category === "campus";
     return true;
@@ -99,8 +102,41 @@ export default function GalleryPageContent() {
         <SectionHeader
           label="Gallery & Media"
           title="Life & Events at Sai SEO Solution"
-          description="Explore our latest Independence Day celebrations, newspaper coverage, classroom sessions, and campus activities in Berhampur."
+          description="Explore our latest Ganesh Puja celebrations, Independence Day events, newspaper coverage, classroom sessions, and campus activities in Berhampur."
         />
+
+        {/* Featured Ganesh Puja Celebration Banner when viewing ganesh */}
+        {activeTab === "ganesh" && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-8 overflow-hidden rounded-3xl border border-amber-300/40 bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 text-white p-5 sm:p-7 shadow-card"
+          >
+            <div className="grid gap-6 md:grid-cols-[1fr_auto] items-center">
+              <div className="space-y-2.5">
+                <div className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-amber-100 border border-white/30 backdrop-blur-sm">
+                  <Sparkles size={13} />
+                  <span>Festive Celebration</span>
+                </div>
+                <h2 className="font-heading text-xl font-bold sm:text-2xl text-white">
+                  Lord Ganesh Puja Celebrations at Sai SEO Solution
+                </h2>
+                <p className="text-xs sm:text-sm text-amber-50 leading-relaxed max-w-2xl">
+                  Welcoming auspicious beginnings, wisdom, and technical success! Our students, faculty, and leadership came together at the Brahmapur center to offer prayers, decorate the campus, and share festive joy.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setSelectedItemIndex(0)}
+                className="rounded-full bg-white text-brand font-semibold px-5 py-2.5 shadow-md hover:bg-amber-50 transition-colors inline-flex items-center gap-2 text-sm shrink-0"
+              >
+                <ZoomIn size={16} />
+                <span>View Puja Darshan</span>
+              </button>
+            </div>
+          </motion.div>
+        )}
 
         {/* Featured Newspaper Coverage Banner when viewing all or news */}
         {(activeTab === "all" || activeTab === "news") && (
@@ -147,8 +183,10 @@ export default function GalleryPageContent() {
             const isTabActive = activeTab === t.id;
             let count = 0;
             if (t.id === "all") count = allGalleryItems.length;
+            else if (t.id === "ganesh")
+              count = allGalleryItems.filter((i) => i.tag.includes("Ganesh")).length;
             else if (t.id === "independence")
-              count = allGalleryItems.filter((i) => i.category === "events").length;
+              count = allGalleryItems.filter((i) => i.tag.includes("Independence")).length;
             else if (t.id === "news")
               count = allGalleryItems.filter((i) => i.category === "news").length;
             else if (t.id === "campus")
@@ -415,10 +453,15 @@ export default function GalleryPageContent() {
 }
 
 export function GalleryPreview() {
-  // Show newspaper + Independence Day photos first in the preview!
+  // Show Ganesh Puja + newspaper + Independence Day photos in the preview!
   const previewItems = [
-    ...latestIndependenceDayImages,
-    ...allGalleryItems.filter((item) => item.category === "campus").slice(0, 3),
+    ganeshPujaImages[0], // Lord Ganesh idol
+    ganeshPujaImages[1], // Students & faculty group
+    ganeshPujaImages[2], // Classroom celebration with art
+    ganeshPujaImages[4], // Batch gathering
+    latestIndependenceDayImages[0], // Newspaper coverage
+    latestIndependenceDayImages[1], // Flag hoisting ceremony
+    ...allGalleryItems.filter((item) => item.category === "campus").slice(0, 2),
   ].slice(0, 8);
 
   return (
@@ -427,8 +470,8 @@ export function GalleryPreview() {
         <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
           <SectionHeader
             label="Institute Gallery"
-            title="Independence Day, Campus & Media Highlights"
-            description="Explore our latest celebration moments, newspaper press features, and hands-on computer training labs at Sai SEO Solution."
+            title="Ganesh Puja, Campus & Media Highlights"
+            description="Explore our latest festive celebrations, newspaper press coverage, and hands-on computer training labs at Sai SEO Solution."
             align="left"
           />
           <Link href="/gallery" className="btn-secondary shrink-0">
@@ -440,16 +483,27 @@ export function GalleryPreview() {
 
         <div className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-4">
           {previewItems.map((item) => {
+            const isGanesh = item.tag.includes("Ganesh");
             const isNews = item.category === "news";
-            const isEvent = item.category === "events";
+            const isIndependence = item.tag.includes("Independence");
 
             return (
               <Link
                 key={item.id}
-                href={isNews ? "/gallery?tab=news" : isEvent ? "/gallery?tab=independence" : "/gallery"}
+                href={
+                  isGanesh
+                    ? "/gallery?tab=ganesh"
+                    : isNews
+                    ? "/gallery?tab=news"
+                    : isIndependence
+                    ? "/gallery?tab=independence"
+                    : "/gallery"
+                }
                 className={`group relative overflow-hidden rounded-2xl border shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-card ${
                   isNews
                     ? "border-teal/40 ring-2 ring-teal/20"
+                    : isGanesh
+                    ? "border-amber-200 ring-1 ring-amber-400/30"
                     : "border-slate-200/80"
                 }`}
               >

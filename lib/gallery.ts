@@ -12,6 +12,64 @@ export interface GalleryItem {
   isFeatured?: boolean;
 }
 
+export const ganeshPujaImages: GalleryItem[] = [
+  {
+    id: "ganesh-puja-idol",
+    filename: "ganesh-puja-idol-celebration.jpg",
+    title: "Lord Ganesh Puja Celebration — Divine Blessings & Altar",
+    category: "events",
+    tag: "🌺 Ganesh Puja",
+    date: "September 2026",
+    description:
+      "Auspicious Lord Ganesh Puja celebrations at Sai SEO Solution institute campus in Brahmapur, seeking blessings of wisdom, learning, and success for our students.",
+    isFeatured: true,
+  },
+  {
+    id: "ganesh-puja-students-faculty",
+    filename: "ganesh-puja-students-faculty-gathering.jpg",
+    title: "Students & Faculty Ganesh Puja Utsav Gathering",
+    category: "events",
+    tag: "🌺 Ganesh Puja",
+    date: "September 2026",
+    description:
+      "Institute director, mentors, staff, and students gathered together to celebrate Ganesh Chaturthi at Sai SEO Solution.",
+    isFeatured: true,
+  },
+  {
+    id: "ganesh-puja-classroom-celebration",
+    filename: "ganesh-puja-classroom-celebration.jpg",
+    title: "Classroom Celebration & Hand-Drawn Ganesh Art",
+    category: "events",
+    tag: "🌺 Ganesh Puja",
+    date: "September 2026",
+    description:
+      "Students celebrating Ganesh Puja inside the institute training hall, featuring festive decorations and a beautiful hand-drawn whiteboard illustration of Lord Ganesha.",
+    isFeatured: true,
+  },
+  {
+    id: "ganesh-puja-institute-group",
+    filename: "ganesh-puja-institute-group-photo.jpg",
+    title: "Ganesh Puja Festivity & Student Fellowship",
+    category: "events",
+    tag: "🌺 Ganesh Puja",
+    date: "September 2026",
+    description:
+      "Vibrant moment of joy and unity among students and instructors during the Ganesh Puja festival at the Berhampur center.",
+    isFeatured: true,
+  },
+  {
+    id: "ganesh-puja-team-celebration",
+    filename: "ganesh-puja-team-student-celebration.jpg",
+    title: "Sai SEO Solution Family at Ganesh Puja",
+    category: "events",
+    tag: "🌺 Ganesh Puja",
+    date: "September 2026",
+    description:
+      "The complete batch of learners and faculty rejoicing together during the festive Ganesh Puja celebration at Sai SEO Solution.",
+    isFeatured: true,
+  },
+];
+
 export const latestIndependenceDayImages = [
   {
     id: "news-independence-day-newspaper",
@@ -107,8 +165,13 @@ export const legacyImages = [
   "WhatsApp Video 2026-07-02 at 23.19.40.jpeg",
 ] as const;
 
-/** All gallery images with new Independence Day & newspaper coverage at the front */
+/** All gallery images with Ganesh Puja & Independence Day & newspaper coverage at the front */
 export const galleryImages = [
+  "ganesh-puja-idol-celebration.jpg",
+  "ganesh-puja-students-faculty-gathering.jpg",
+  "ganesh-puja-classroom-celebration.jpg",
+  "ganesh-puja-institute-group-photo.jpg",
+  "ganesh-puja-team-student-celebration.jpg",
   "newspaper-coverage-independence-day.jpg",
   "independence-day-flag-hoisting-group.jpg",
   "independence-day-lab-celebration-selfie.jpg",
@@ -132,6 +195,7 @@ export const galleryVideos = [
 
 /** All structured gallery items with rich details */
 export const allGalleryItems: GalleryItem[] = [
+  ...ganeshPujaImages,
   ...latestIndependenceDayImages,
   ...legacyImages.map((filename, idx) => ({
     id: `legacy-${idx}`,
